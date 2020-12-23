@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
@@ -6,18 +6,127 @@ dataSources:
     name: Contract
     network: mainnet
     source:
-      address: "0x06FE76B2f432fdfEcAEf1a7d4f6C3d41B5861672"
-      abi: Contract
+      address: "0xF7a48F50fB8228f7Df773A4936B1C074f9deB23a"
+      abi: BerezkaPriceTracker
+      startBlock: 11179182
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.2
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - OwnershipTransferred
+        - DayHistoricalData
+        - HourHistoricalData
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: BerezkaPriceTracker
+          file: ./abis/BerezkaPriceTracker.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/price.ts
+
+  - kind: ethereum/contract
+    name: FLEXToken
+    network: mainnet
+    source:
+      address: "0x0D7DeA5922535087078dd3D7c554EA9f2655d4cB"
+      abi: ERC20
+      startBlock: 10504092
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/balance.ts
+      entities:
+        - CurrentHistoricalBalance
+        - HistoricalBalance
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-      file: ./src/mapping.ts
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: tokenTransferred
+
+  - kind: ethereum/contract
+    name: EFLXToken
+    network: mainnet
+    source:
+      address: "0xD68E7b64888F095Ee15f18347ccA7e453E0DBe17"
+      abi: ERC20
+      startBlock: 10537727
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/balance.ts
+      entities:
+        - HistoricalBalance
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: tokenTransferred
+
+  - kind: ethereum/contract
+    name: BDQToken
+    network: mainnet
+    source:
+      address: "0xf6ce9BFA82D1088d3257a76ec2e0ce1C8060BF8c"
+      abi: ERC20
+      startBlock: 10104687
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/balance.ts
+      entities:
+        - HistoricalBalance
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: tokenTransferred
+
+  - kind: ethereum/contract
+    name: DYNAToken
+    network: mainnet
+    source:
+      address: "0xdc76450fd7e6352733fe8550efabff750b2de0e3"
+      abi: ERC20
+      startBlock: 10814665
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/balance.ts
+      entities:
+        - HistoricalBalance
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: tokenTransferred
+
+  - kind: ethereum/contract
+    name: SKYFLEXToken
+    network: mainnet
+    source:
+      address: "0x26677EB24FD007Ad279FC55f367De31482E1bF54"
+      abi: ERC20
+      startBlock: 10866360
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/balance.ts
+      entities:
+        - HistoricalBalance
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: tokenTransferred

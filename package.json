@@ -1,16 +1,18 @@
 {
   "name": "berezka",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ berezka/berezka",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ execc/berezka-dao",
     "create-local": "graph create --node http://localhost:8020/ berezka/berezka",
     "remove-local": "graph remove --node http://localhost:8020/ berezka/berezka",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 berezka/berezka"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.18.0",
-    "@graphprotocol/graph-ts": "0.18.0"
+    "@graphprotocol/graph-ts": "0.18.0",
+    "assemblyscript": "^0.14.10"
   }
 }
+  

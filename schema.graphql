@@ -1,6 +1,49 @@
-type ExampleEntity @entity {
+type DayHistoricalData @entity {
+  id: ID!                 # dayId + Token
+  dayId: Int!             # timestamp rounded to current day by dividing by 86400 - should only be one per day
+  date: Int!              # day number
+  token: Bytes!           # token address
+  price: BigDecimal!      # token price in USD
+  totalPrice: BigDecimal! # price of total supply of tokens in USD
+  apy: BigDecimal!        # annual yeild
+  supply: BigDecimal!     # total supply of underlying token
+}
+
+type HourHistoricalData @entity {
+  id: ID!                 # dayId + Token
+  hourId: Int!            # timestamp rounded to current day by dividing by 3600 - should only be one per hour
+  date: Int!              # day number
+  token: Bytes!           # token address
+  price: BigDecimal!      # token price in USD
+  totalPrice: BigDecimal! # price of total supply of tokens in USD
+  supply: BigDecimal!     # total supply of underlying token
+}
+
+type CurrentHistoricalBalance @entity {
   id: ID!
-  count: BigInt!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
+  token: Bytes!
+  wallet: Bytes!
+  amount: BigDecimal!
+}
+
+type HistoricalBalance @entity {
+  id: ID!
+  dayId: Int!
+  hourId: Int!
+  date: Int!
+  wallet: Bytes!
+  token: Bytes!
+  amount: BigDecimal!
+}
+
+type BalanceEvent @entity {
+  id: ID!
+  dayId: Int!
+  hourId: Int!
+  date: Int!
+  wallet: Bytes!
+  counterparty: Bytes!
+  token: Bytes!
+  amount: BigDecimal!
+  kind: Int!
 }
