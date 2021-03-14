@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: mainnet
+    source:
+      address: "0xF7a48F50fB8228f7Df773A4936B1C074f9deB23a"
+      abi: BerezkaPriceTracker
+      startBlock: 11179182
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - DayHistoricalData
+        - HourHistoricalData
+      abis:
+        - name: BerezkaPriceTracker
+          file: ./abis/BerezkaPriceTracker.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/price.ts

@@ -1,0 +1,20 @@
+type DayHistoricalData @entity {
+  id: ID!                 # dayId + Token
+  dayId: Int!             # timestamp rounded to current day by dividing by 86400 - should only be one per day
+  date: Int!              # day number
+  token: Bytes!           # token address
+  price: BigDecimal!      # token price in USD
+  totalPrice: BigDecimal! # price of total supply of tokens in USD
+  apy: BigDecimal!        # annual yeild
+  supply: BigDecimal!     # total supply of underlying token
+}
+
+type HourHistoricalData @entity {
+  id: ID!                 # dayId + Token
+  hourId: Int!            # timestamp rounded to current day by dividing by 3600 - should only be one per hour
+  date: Int!              # day number
+  token: Bytes!           # token address
+  price: BigDecimal!      # token price in USD
+  totalPrice: BigDecimal! # price of total supply of tokens in USD
+  supply: BigDecimal!     # total supply of underlying token
+}
