@@ -1,0 +1,56 @@
+type DayHistoricalData @entity {
+  id: ID!                 # dayId + Token
+  dayId: Int!             # timestamp rounded to current day by dividing by 86400 - should only be one per day
+  date: Int!              # day number
+  token: Bytes!           # token address
+  price: BigDecimal!      # token price in USD
+  totalPrice: BigDecimal! # price of total supply of tokens in USD
+  apy: BigDecimal!        # annual yeild
+  supply: BigDecimal!     # total supply of underlying token
+}
+
+type HourHistoricalData @entity {
+  id: ID!                 # dayId + Token
+  hourId: Int!            # timestamp rounded to current day by dividing by 3600 - should only be one per hour
+  date: Int!              # day number
+  token: Bytes!           # token address
+  price: BigDecimal!      # token price in USD
+  totalPrice: BigDecimal! # price of total supply of tokens in USD
+  supply: BigDecimal!     # total supply of underlying token
+}
+
+type DayTokenComponent @entity {
+  id: ID!                       # dayId + Token
+  dayId: Int!                   # timestamp rounded to current day by dividing by 86400 - should only be one per day
+  date: Int!                    # day number
+  token: Bytes!                 # token address
+  supply: BigDecimal!           # total supply of underlying token
+  name: String!                 # token name
+  components: [TokenComponent]! # token parts
+  totalPrice: BigInt!           # total const of one asset
+  price: BigInt!                # price per token
+}
+
+type TokenComponent @entity {
+  id: ID!                       # random unique id 
+  token: Bytes!                 # token address
+  tokrnStr: String!             # token string
+  tokenType: String!            # token type in zerion API
+  amount: BigInt!               # balance of tokens in address
+  deposit: BigInt!              # deposit part of palance
+  debt: BigInt!                 # debt part of palance
+  staking: BigInt!              # staking part of palance
+  price: BigInt!                # price (per one token)
+  name: String!                 # token name
+  parts: [TokenComponentPart]!  # parts of tokens
+}
+
+type TokenComponentPart @entity {
+  id: ID!                 # Random unique id 
+  token: Bytes!           # Token address
+  decimals: Int!          # Decimals of token
+  ratio: BigInt!          # Amount of this token in 10e18 base token
+  amount: BigInt!         # Actual amount of this token
+  name: String!                 # token name
+  price: BigInt!          # Price per component share
+}

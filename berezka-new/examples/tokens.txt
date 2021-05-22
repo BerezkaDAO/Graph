@@ -1,0 +1,27 @@
+query {
+  dayTokenComponents {
+    id,
+    dayId,
+    date,
+    token,
+    supply,
+    price,
+    name,
+    components {
+      id,
+      price,
+      token,
+      tokenType,
+      name,
+      amount,
+      parts {
+        id,
+        ratio,
+        price,
+        amount,
+        name,
+        token
+      }
+    }
+  }
+}
