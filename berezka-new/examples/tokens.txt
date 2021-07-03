@@ -1,26 +1,40 @@
 query {
-  dayTokenComponents {
+  dayTokenComponents(
+    orderDirection: desc,
+    orderBy: dayId,
+    first: 1
+  ) {
     id,
     dayId,
     date,
     token,
     supply,
     price,
+    totalPrice,
     name,
-    components {
+    vaults {
       id,
-      price,
-      token,
-      tokenType,
-      name,
-      amount,
-      parts {
+      vault,
+      totalPrice,
+      components {
         id,
-        ratio,
         price,
-        amount,
+        token,
+        tokenType,
         name,
-        token
+        amount,
+        debt,
+        debtAdapters,
+        staking,
+        stakingAdapters
+        parts {
+          id,
+          ratio,
+          price,
+          amount,
+          name,
+          token
+        }
       }
     }
   }

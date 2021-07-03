@@ -12,6 +12,7 @@
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
     "@graphprotocol/graph-ts": "0.20.0",
-    "assemblyscript": "^0.18.31"
+    "assemblyscript": "^0.18.31",
+    "node-fetch": "^2.6.1"
   }
 }

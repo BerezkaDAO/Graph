@@ -1,0 +1,347 @@
+[{
+    "Balancer V2 pool token": "0x0FDd2a971956e2737E721d1670Ac7e057031aC6A",
+    "Genesis Group token": "0x7C19848DEf30743ab1e2B3b3Db7008b646af9160",
+    "Curve metapool token": "0x7dDAaEff0474FC0b37775e566951fB996a9Fe436",
+    "Saddle pool token": "0x85D57ea2aeFb67B28E3CD6C17bB7eFcBD2244A54",
+    "Stake DAO Vault": "0xAC73145204855736B25746B530B7dfbFe27e3E83",
+    "Interest Bearing Token V2": "0x716DaD146209C42B6e7289C43e292412eBBA8520",
+    "DODO V2 pool token": "0xBC8Bf7Dc0f9685c3d0DF2Fef31694c2f74e23437",
+    "OUSD token": "0x60d51201c5dFde2098432df682a4659532c1b44c",
+    "mStable Savings": "0xCe08591cd8691D262f40F21E29Faad4353eEbEA1",
+    "Interest Bearing ETH": "0xAd8813cA089E847eD64ca512dCac3b4752F5688a",
+    "EnzymeToken": "0x9e71455D748C23566b19493D09435574097C7D67",
+    "PoolTogether V3 ticket": "0xb4E0E1672fFd9b128784dB9f3BE9158fac3f1DFc",
+    "Yearn Token Vault v0.3.0": "0xb460FcC1B6c1CBD7D03F47B6BD5F03994d286c75",
+    "1inch liquidity protocol token": "0xd7c3CEA7bC169cE7B498Ac7583D8dA576E8acB8E",
+    "xSUSHI token": "0x853b8045BB6390FA6Bff4e2aBe9140307A2C02f6",
+    "MMVault": "0xAb0a7e392Ac011fce341b5d5E7dC4CE8dFc91c2d",
+    "PieDAO ExperiPie Token": "0xE1C91D254d00f72a6CC5b708F278561E5992D657",
+    "SnowSwap pool token": "0x198e7001Af2C732C74bC28bcDA18E45D77D9E170",
+    "AToken V2": "0x1da74175DcB641298dF7a704E8a753e20d096050",
+    "FPT token": "0xCBE7623Fc9458f6e030D31Bf4CcF968fF677A4Ae",
+    "SetToken V2": "0x13a1C4cEad8552Ea27c7ADBd4D4aF8B6ec1fd54f",
+    "PickleJar": "0x71FDd83eD8500eb994cED5833C5a99CeD54c1413",
+    "DODO pool token": "0x5FAcd245d1597876D381e275dae31fe605820605",
+    "iToken": "0xB4012544e8adb374cd68bE1cac1E1bA624920CBC",
+    "Berezka DAO": "0x422658ED565e401a8112c5069A65C960dCC83bb0",
+    "Swerve pool token": "0xbc9fe01E36c49C2Ba039D0dD9399b5F21868e707",
+    "Mooniswap pool token": "0xf6c8E6083fF7B328e524681576139725C990C67d",
+    "MelonToken": "0x2064CaF9109aA38Ae15A137cBa80e9611eCc5ECF",
+    "SmartToken V2": "0x5F96AA1Ca23f439aA6dC342bcA36635A12476d0E",
+    "KToken": "0xa94220fA11A854dA12856dcABaF97D8188F0B3EA",
+    "Masset": "0x5f515a2CeBc953196A5ac3de4D6E795D393EE27A",
+    "Chi token": "0xAAD78BCFD0b5354E58E6ef4E745EE40f01C2E87E",
+    "AToken Uniswap Market": "0x45230F5adC0ee8cd4628d716DDaf92487150f5B2",
+    "Uniswap V2 pool token": "0x6C5D49157863f942A5E6115aaEAb7d6A67a852d3",
+    "PieDAO Pie Token": "0x2D66427C0614B703EFaA3Da4EFD97Fe05DE11bf3",
+    "SmartToken": "0x0EFbd54c0aAc9BC939A159E09F6713D941Bb4A57",
+    "MToken": "0xb018AFbbe41bEe25d92E595796C50A934d701771",
+    "SetToken": "0xB917614900c8A761242907fE791aB57a4a1e848C",
+    "Uniswap V1 pool token": "0x60319FE503ce9e8370cF1b015C5ACd595AEE0487",
+    "PoolTogether pool": "0xAa296ECA3C01fcC70EB621D6d2bA0292Ff58555D",
+    "Chai token": "0x186106d8369591fACD3D80124B6e4f5d0F2f9418",
+    "YToken": "0x65B23774daE2a5be02dD275918DDF048d177a5B4",
+    "IdleToken": "0xb72A4aF9052728B830c814A256600F9b0920DD95",
+    "Curve pool token": "0x99b0bEadc3984eab9842AF81f9fad0C2219108cc",
+    "CToken": "0x5C6d81d0A2245efe11AeBc352dcdD5DD53Ea0879",
+    "Balancer pool token": "0x015F5DC6903bf3cCC548BA9a3256203CdD902Ed5",
+    "AToken": "0x987F3db2eec36224ba3F2d907fD93eC8AA208aC3",
+    "ERC20": "0x85609AfE45eE16e52aCB33b8AD103531fC959647"
+  },
+  {
+    "Liquity": [
+      "0xff18136888A14Dbba737ac25C8Bd8B8c813Aa0fE",
+      "0xeC81C076243Bc7f6d803b7f365c29776ad7f6485"
+    ],
+    "bZx • Vested Staking": [
+      "0x2cB9777eeE27DCb861D6115bA487df53F3391061"
+    ],
+    "bZx • Staking": [
+      "0xefAA44200C73f2E4234B7CAdFF83D52BA4c1fF2d"
+    ],
+    "Alpha Homora V2": [
+      "0xb846e464e71F84141e3c7B0FCB171527F3842F69"
+    ],
+    "Stake DAO": [
+      "0x2522888a9624CD01bEB26d8Baf78A44C196c226f"
+    ],
+    "Saddle": [
+      "0xD52Dc4cAc78bBFfebED78254c20FA455d527B17c"
+    ],
+    "Reflexer": [
+      "0x8c9D55cA146D2f1Be493DF4d1E81a4311e129ef1",
+      "0xc31D7A5D1f311fCC111193D1fe19Bb5cD72a07c1"
+    ],
+    "Curve • Vote Escrowed CRV": [
+      "0xF580466B0A62d5fC1B9B16F808Cf01fB24E93Bfa"
+    ],
+    "Cometh • Tube": [
+      "0x02Fad28726A536BFDaB4740EE7D34eD79f5c7D7C"
+    ],
+    "Cometh • Staking": [
+      "0x809a20E831Cf3064B7d75E7575fe2291643A46bB"
+    ],
+    "1inch LP • Staking": [
+      "0x4ef7edF1247a3F30363dEa6a64830C22C9fD8Ab4"
+    ],
+    "Livepeer": [
+      "0x0D3089bE8772a5a8A5292e353334d2c3B2f43693"
+    ],
+    "Alpha Homora": [
+      "0xDe176790319352A5081B6D3ef07eC391C60B06C0"
+    ],
+    "mStable V2": [
+      "0x3D1c28b456DeECCd73880Fdc3a48d69803C222bE"
+    ],
+    "Enzyme": [
+      "0x4FEE0353e1C415f0F1B90881afF9566e0E23B694"
+    ],
+    "Yearn Token Vaults": [
+      "0x6A142A369f88D8db48bC6E70F40e35e46e94B957"
+    ],
+    "PoolTogether V3": [
+      "0x4867318b0E490BD5E9bdcBaa6c9AfcFd9cBdeaaB"
+    ],
+    "1inch Liquidity Protocol": [
+      "0xDd700EcC5c6F8D9414dA9E3d7731aC0B90F121A5"
+    ],
+    "SushiSwap • Staking": [
+      "0x2C576fF1c2Fd70c1555F64Bd61E4dB271Bff2f99"
+    ],
+    "Mushrooms Finance": [
+      "0x924360370eB8fe054A033Cc77563A91D5Fbd67dD"
+    ],
+    "Mushrooms Finance • Staking": [
+      "0x3027AC95A434DBc005BB847AADFcAe7daA2a82Cd"
+    ],
+    "Akropolis • AKRO Staking": [
+      "0x2605f7F4F3E64388676c171B4c2262c8cee78678"
+    ],
+    "Akropolis • ADEL Staking": [
+      "0xcf16cEDf2A2Ab3b91a6b276Fc3DE67DDc5c8e8Af"
+    ],
+    "Bancor • Locked BNT": [
+      "0x9e9C448d307Db93cF74eCe7202DA49041E4fa8f3"
+    ],
+    "Bancor • Liquidity Protection": [
+      "0x39998EaE4bB5FC384277a1eb6b8005C6b1031A0d"
+    ],
+    "PieDAO ExperiPies": [
+      "0x5b81Bf245f7d7384339DBE941Bd145f717d47F1B"
+    ],
+    "SnowSwap": [
+      "0xaFa22D911e300f2c85DD939305D40E8F494E5116"
+    ],
+    "Aave V2 • Variable Debt": [
+      "0x7bF1015F8779102FB918792396c2947aCDB5d9F7"
+    ],
+    "Aave V2 • Stable Debt": [
+      "0xe658D78ef1f0e3B8DD63e5D5163B9f500fa2d75a"
+    ],
+    "Aave V2": [
+      "0xb20E50Af4Ae9D4052E18aCFA4De6F28179f97182"
+    ],
+    "Idle • Early Rewards": [
+      "0xa8c5BC13B8b1247e729C4349de6450a14e4a3a51"
+    ],
+    "Harvest • Profit Sharing": [
+      "0xB9b0c5f95744Bec7603eD6385E409f885F8Efdec"
+    ],
+    "Curve • Vesting": [
+      "0xF58F90cb329F812f6d7c5a7b14ffCcACBE9C034E"
+    ],
+    "Curve • Liquidity Gauges": [
+      "0xBb52514C280F0879Fde9054ddb8472eE6a8F02f2"
+    ],
+    "ygov.finance (v1)": [
+      "0xeF2D0790Ea45B45046D3f09F7B19ef9941ec66C9"
+    ],
+    "ygov.finance (v2)": [
+      "0xDa431E99Ee44776D27d228A8F5C61E882AfA70d9"
+    ],
+    "mStable • Staking": [
+      "0xF52eEbf497e6e499c46E6D56C2cDdF4DcCf9D113"
+    ],
+    "Swerve • Liquidity Gauges": [
+      "0xA28365eD2D33267e5fc9c36325051661770AcFb1"
+    ],
+    "Pickle Finance • Farms": [
+      "0x02FEdc22b6DeE250AdebEDeB6a358e4BD04adec3"
+    ],
+    "Pickle Finance • Staking": [
+      "0x2CCea1fb8025289925C8773271cEa3eE6fe3c330"
+    ],
+    "Aave • Staking": [
+      "0x2B16661c5cA141A0B8F7FFc6Cfeb3674bF39845e"
+    ],
+    "C.R.E.A.M. • Staking": [
+      "0xBEfAc467Ef43d5AB22287042Ff75f314D21B342c"
+    ],
+    "Compound Governance": [
+      "0xE0D3bde72B1B983129953232455a1C6E78F5D6B2"
+    ],
+    "zlot.finance": [
+      "0x9142926dB3748e499955fa3bB802509BCD36C161"
+    ],
+    "FinNexus": [
+      "0xf48db9147332331E0db68a9Cfc1774A1361857F2",
+      "0xc4Fd8CAA74305c436A995E5f5aE06bAc69257c35"
+    ],
+    "Pickle Finance": [
+      "0x9dF6aeaCe0df85520F77eB5dF39E8954F2E794d3"
+    ],
+    "DODO": [
+      "0xA0ed9CE70241E907C003a5FDfEEf6b40C67A5370",
+      "0xA36Dd4688Bc933d8cEBf91dd2E233222b76Ee467"
+    ],
+    "Berezka": [
+      "0xc49eAF505De79f0457c085A31576eDc5dc9FBAD3"
+    ],
+    "bZx": [
+      "0x1A3dE69A70A7d4e6FB6a207A9Aaf8Ee3A7cB2709",
+      "0xAcC2c62639FfCA4910AAFc7DF22f233C63407925"
+    ],
+    "C.R.E.A.M.": [
+      "0xa5725860D54A6e8d7C5561C1f1E648142Eccb85e",
+      "0xe354A4Be079d114a08828E2f6160df6ef7c489db"
+    ],
+    "Swerve": [
+      "0x9E4b528724BEa295CDF5e0B0E0a6442f45fc4463"
+    ],
+    "SashimiSwap": [
+      "0x010C5322d78c88CA18282b0a072A8913648B3038"
+    ],
+    "Harvest": [
+      "0x93017dDC9729b7F2226E4649afA764279639bF8d"
+    ],
+    "KIMCHI": [
+      "0xd957fAd3F767CbE93824dC5eBF8694c51A5de680"
+    ],
+    "SushiSwap": [
+      "0x0319A976C8deA5d31d1Cf36eAFFd8bec14957179"
+    ],
+    "Nexus Mutual": [
+      "0x0F6D3785a42a1d62B17ce40A0D5159B17b97Cba7"
+    ],
+    "Mooniswap": [
+      "0xEC476dD4DbF8DFa147244867C0B3B9a5F11d171c"
+    ],
+    "Matic": [
+      "0x8d53A8D660aa917755F28bB81Ea79de94187f4aF"
+    ],
+    "Aragon": [
+      "0xB1a144C16e7d3bA1B1896De477DFA3d55717dc09"
+    ],
+    "Melon": [
+      "0x52f3936a9cb032cb4D5580a59Df3654D271D2949"
+    ],
+    "yearn.finance • Vaults": [
+      "0x49DD4a17a84A7c16d0b15AB75f325900Ae2F86ee"
+    ],
+    "KeeperDAO": [
+      "0x913647e26C4Fb1111d78157a8bA1dDB3aB94f549"
+    ],
+    "mStable": [
+      "0xfc926dA56Bc8988CfbF8b6B9592242F523Bb60CB"
+    ],
+    "KyberDAO": [
+      "0x3ec898ad082C35C92A174269770D23e98Ab1a00A"
+    ],
+    "DDEX • Spot": [
+      "0xDB3aD18B6EF9949FeE2D8E37fDF6F46cCFb6a44e"
+    ],
+    "DDEX • Margin": [
+      "0x22fB29a8130FA4811E05f79C366b3f5520688A93",
+      "0xEC8519F02828c7cccE68c430aC5A023f0a63A13a"
+    ],
+    "DDEX • Lending": [
+      "0x151e18aA894F68908c42E405D75E2F3f4b36f070"
+    ],
+    "Ampleforth": [
+      "0x04073fE9e16531967c13733225F05826eDA9ff23"
+    ],
+    "Maker Governance": [
+      "0x9C4C6ffCa2eE8d57A5C7cF0b76549fBdA2E37580"
+    ],
+    "Gnosis Protocol": [
+      "0x2b663B893392816B938BaBC490d8acC29AF4eCA1"
+    ],
+    "Chi Gastoken by 1inch": [
+      "0x257137D5FFabac902A339556432122206eAdf94D"
+    ],
+    "Idle • Risk-Adjusted": [
+      "0xcF05979b6059fEE9Fcf01C408B5f1cBbc48fA637"
+    ],
+    "Aave • Uniswap Market": [
+      "0xBe77D41Ab26F6701a359e0Ccf0CaAe3fA10E766F",
+      "0xa0848938068ACB263B47f0C44F7D2F9F39895984"
+    ],
+    "Uniswap V2": [
+      "0x4EdBac5c8cb92878DD3fd165e43bBb8472f34c3f",
+      "0x2Cf372984a2e3c8B2A021d0889B65D590f00D646"
+    ],
+    "PieDAO": [
+      "0x8342228044FD5Dc6FCf6b1C9A466DA83dEA28Ae1"
+    ],
+    "Multi-Collateral Dai": [
+      "0x2e9dDd0026CC3F26393AE7796ccdC8eD1fb4Bd05",
+      "0x525a4259435682Ab0d4BB6c8F0cDeE25f5B6cD26"
+    ],
+    "Bancor": [
+      "0xa5dC252b96de88d9f4dCB5F687E5C0d049389Aff",
+      "0x3dcB6E6CddB8347161Fb8aD309C4033A0042086d"
+    ],
+    "DeFi Money Market": [
+      "0xd9fADfaFe49712c420b5efC85774f178fB2f3dA3"
+    ],
+    "TokenSets": [
+      "0x6Dd6a07Ca202514ad502676fc42F76A6a7DcD65B",
+      "0x089F0Be0354F47d005e3871299CDdfDFffdBE5E6"
+    ],
+    "0x Staking": [
+      "0x42F21fBD1C8711b2EdD0853f98feD73E6A5d280D"
+    ],
+    "Uniswap V1": [
+      "0x40706a6CDFEB61817EAdf7766EDb6724065088CC"
+    ],
+    "Synthetix": [
+      "0xd610Da908a460a8189D2d9830583228AA2151856",
+      "0x8537550aceCCEF73Af7b05c83e25e80f2531C964"
+    ],
+    "PoolTogether": [
+      "0xc819251E32bB49A2FD74bE1e9bB6bcf24BcC6390"
+    ],
+    "Dai Savings Rate": [
+      "0xb99941b684D01e91AF27B5EB88eF7405D3CfDefE"
+    ],
+    "Chai": [
+      "0x2449f66700A3E29d0eA3927Af142F3d39f2C110E"
+    ],
+    "iearn.finance (v3)": [
+      "0x38567918557518272a87087Aa4a3729FCD3f410B"
+    ],
+    "iearn.finance (v2)": [
+      "0xc9131a1bf881bBbDF50272adEDaBce5a9D62AAB1"
+    ],
+    "Idle": [
+      "0x363452E08751311eFe6d99457FfB5FA3D048E30a"
+    ],
+    "dYdX": [
+      "0x375c3222bb7d4834B4381ABD4ED15DFF4d4c0A68",
+      "0xBf3fc291876707b2D0C8fC49BCD76fAE00219d37"
+    ],
+    "Curve": [
+      "0xEd8885a1e77b5D679544b06196fE8ECC69367Ebd"
+    ],
+    "Compound": [
+      "0xaA74B0f33cab1B291980532BC5E0057E10adb2a3",
+      "0x8d4439e2199528E28ddC1d4522FD086c70b0401c"
+    ],
+    "Balancer": [
+      "0x581Ae5AF7afa6f8171Bbf40d1981779F168A9523"
+    ],
+    "Aave": [
+      "0x8B62C02091FE06AE3454D3c12921B32611Ba5501",
+      "0x30F0BB7556159B0E812DE4af7023daCFDD4F7110"
+    ]
+  }]

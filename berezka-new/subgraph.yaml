@@ -8,7 +8,7 @@ dataSources:
     source:
       address: "0xF7a48F50fB8228f7Df773A4936B1C074f9deB23a"
       abi: BerezkaPriceTracker
-      startBlock: 12472199
+      startBlock: 12490499
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

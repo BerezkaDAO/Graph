@@ -1,12 +1,12 @@
-import { BigDecimal, Address, ethereum, BigInt, log, Bytes } from "@graphprotocol/graph-ts"
+import { BigDecimal, Address, ethereum, BigInt, log, Bytes, ByteArray } from "@graphprotocol/graph-ts"
 import { BerezkaPriceTracker } from "../generated/Contract/BerezkaPriceTracker"
 import { StaklingGovernance } from  "../generated/Contract/StaklingGovernance"
-import { BerezkaGovernance } from "../generated/Contract/BerezkaGovernance"
+import { BerezkaGovernance, BerezkaGovernance__listTokens1ResultValue0Struct } from "../generated/Contract/BerezkaGovernance"
 import { ProtocolAdapter } from "../generated/Contract/ProtocolAdapter"
 import { AdapterRegistry } from "../generated/Contract/AdapterRegistry"
 import { EthBalance2 } from "../generated/Contract/EthBalance2"
 import { ERC20 } from "../generated/Contract/ERC20"
-import { DayHistoricalData, HourHistoricalData, DayTokenComponent, TokenComponent, TokenComponentPart } from "../generated/schema"
+import { DayHistoricalData, HourHistoricalData, DayTokenComponent, TokenComponent, TokenVault, TokenComponentPart } from "../generated/schema"
 
 // Berezka price adapter address
 const PRICE_API_ROOT = "0x2184FaE5a2e3355DF155AD3cDb2089F9f6e0868B"
@@ -108,6 +108,67 @@ function handleTargetToken(targetToken: Address, timestamp: i32): void {
     let stakingAdapters = staking.listStakings()
     log.debug("Got stakingAdapters size: {}", [strlen(stakingAdapters)])
 
+    let vaultIDs = new Array<string>(vaults.length)
+    let totalPrice = BigInt.fromI32(0)
+    for (let v = 0; v < vaults.length; v++) {
+        let vault = handleTokenVault(
+            timestamp,
+            targetToken,
+            vaults[v],
+            assets,
+            debtAdapters,
+            ethAdapters,
+            stakingAdapters
+        )
+
+        vaultIDs[v] = vault.id
+        totalPrice = totalPrice.plus(vault.totalPrice)
+        
+        vault.save()
+    }
+
+    let tokenContract = ERC20.bind(targetToken)
+    let name   = ""
+    let maybeName = tokenContract.try_name()
+    if (!maybeName.reverted) {
+        name = maybeName.value
+    }
+    let supply = tokenContract.totalSupply()
+
+    let totalPriceDec = totalPrice.toBigDecimal()
+    let supplyDec = supply.toBigDecimal()
+    let pricePowDec = BigInt.fromI32(10).pow(6).toBigDecimal()
+    let supplyPowDec = BigInt.fromI32(10).pow(18).toBigDecimal()
+    let adjTotalPrice = totalPriceDec.div(pricePowDec)
+    let adjSupply = supplyDec.div(supplyPowDec)
+    let adjPrice = adjTotalPrice.div(adjSupply)
+    let priceDec = adjPrice.times(pricePowDec)
+    let priceDec0Str = priceDec.truncate(0).toString()
+    let price = BigInt.fromString(priceDec0Str)
+
+    let dayID = timestamp / 86400
+    let dayTokenComponentsID = dayID.toString().concat('_').concat(FLEX_TOKEN)
+    let dayTokenComponents = new DayTokenComponent(dayTokenComponentsID)
+    dayTokenComponents.date = timestamp
+    dayTokenComponents.dayId = dayID
+    dayTokenComponents.supply = supply.toBigDecimal()
+    dayTokenComponents.token = Address.fromString(FLEX_TOKEN)
+    dayTokenComponents.vaults = vaultIDs
+    dayTokenComponents.totalPrice = totalPrice
+    dayTokenComponents.price = price
+    dayTokenComponents.name = name
+    dayTokenComponents.save()
+}
+
+function handleTokenVault(
+    timestamp: u32,
+    targetToken: Address,
+    vault: Address,
+    assets: BerezkaGovernance__listTokens1ResultValue0Struct[],
+    debtAdapters: Address[],
+    ethAdapters: Address[],
+    stakingAdapters: Address[]
+): TokenVault {
     let length = assets.length;
 
     let components = new Array<TokenComponent>(1 + length)
@@ -115,13 +176,13 @@ function handleTargetToken(targetToken: Address, timestamp: i32): void {
     let ethComponent = getEthBalances(
         timestamp,
         targetToken,
-        vaults,
+        vault,
         ethAdapters
     )
 
     components[0] = ethComponent
     
-
+    let notEmptyComponentCount = 0;
     for (let i = 0; i < length; i++) {
         let asset = assets[i]
 
@@ -135,54 +196,34 @@ function handleTargetToken(targetToken: Address, timestamp: i32): void {
             targetToken,
             token,
             tokenType,
-            vaults,
+            vault,
             debtAdapters,
             stakingAdapters
         )
 
         components[1 + i] = component
-    }
-
-    let notEmptyComponentCount = 0;
-    for (let i = 0; i < components.length; i++) {
-        if (!components[i].amount.equals(BigInt.fromI32(0))) {
+        if (!component.amount.equals(BigInt.fromI32(0))) {
             notEmptyComponentCount = notEmptyComponentCount + 1    
         }
     }
 
-    let notEmptyComponents = new Array<TokenComponent>(notEmptyComponentCount)
     let notEmptyComponentsIDs = new Array<string>(notEmptyComponentCount)
 
     let totalPrice = BigInt.fromI32(0)
     for (let i = 0; i < components.length; i++) {
         if (!components[i].amount.equals(BigInt.fromI32(0))) {
-            notEmptyComponents.push(components[i])      
             notEmptyComponentsIDs.push(components[i].id)
             totalPrice = totalPrice.plus(components[i].price)
             components[i].save()
         }
     }
 
-    let tokenContract = ERC20.bind(targetToken)
-    let name   = ""
-    let maybeName = tokenContract.try_name()
-    if (!maybeName.reverted) {
-        name = maybeName.value
-    }
-    let supply = tokenContract.totalSupply()
-
-    let dayID = timestamp / 86400
-    let dayTokenComponentsID = dayID.toString().concat('_').concat(FLEX_TOKEN)
-    let dayTokenComponents = new DayTokenComponent(dayTokenComponentsID)
-    dayTokenComponents.date = timestamp
-    dayTokenComponents.dayId = dayID
-    dayTokenComponents.supply = supply.toBigDecimal()
-    dayTokenComponents.token = Address.fromString(FLEX_TOKEN)
-    dayTokenComponents.components = notEmptyComponentsIDs
-    dayTokenComponents.totalPrice = totalPrice
-    dayTokenComponents.price = totalPrice.div(supply)
-    dayTokenComponents.name = name
-    dayTokenComponents.save()
+    let id = timestamp.toString().concat('_').concat(targetToken.toHexString()).concat('_').concat(vault.toHexString())
+    let tokenVault = new TokenVault(id)
+    tokenVault.totalPrice = totalPrice
+    tokenVault.vault = vault
+    tokenVault.components = notEmptyComponentsIDs
+    return tokenVault
 }
 
 function handleERC20Component(
@@ -242,7 +283,7 @@ function handleExpandComponent(
 function getEthBalances(
     timestamp: i32,
     token: Address,
-    vaults: Address[],
+    vault: Address,
     debtAdapters: Address[],
 ): TokenComponent {
     let asset = Address.fromString(ETH)
@@ -252,25 +293,26 @@ function getEthBalances(
     let componentBalance: BigInt = BigInt.fromI32(0)
     let componentDebt: BigInt = BigInt.fromI32(0)
 
-    let vaultsLength = vaults.length
-    for (let j = 0; j < vaultsLength; j++) {
-        let vault = vaults[j]
-        log.debug("getEthBalances processing vault: {}", [vault.toHexString()])
-            
-        let vaultTokenBalance = ethBalance.balances([vault], [Address.fromString(ZERO_ADDRESS)])[0]
-        log.debug("getEthBalances got vault token balance: {}", [asset.toHexString(), vaultTokenBalance.toString()])
+    log.debug("getEthBalances processing vault: {}", [vault.toHexString()])
+        
+    let vaultTokenBalance = ethBalance.balances([vault], [Address.fromString(ZERO_ADDRESS)])[0]
+    log.debug("getEthBalances got vault token balance: {}", [asset.toHexString(), vaultTokenBalance.toString()])
 
-        componentBalance = componentBalance.plus(vaultTokenBalance)
-        componentDebt = componentDebt.plus(getAdapterBalance(asset, vault, debtAdapters))
-    }
+    componentBalance = componentBalance.plus(vaultTokenBalance)
+    let ethDebt = getAdapterBalance(asset, vault, debtAdapters)
+    componentDebt = componentDebt.plus(ethDebt.amount)
+    
     let balance = componentBalance.minus(componentDebt)
-    let id = timestamp.toString().concat('_').concat(token.toHexString()).concat('_').concat(asset.toHexString())
+    let id = timestamp.toString().concat('_').concat(token.toHexString()).concat('_').concat(vault.toHexString()).concat('_').concat(asset.toHexString())
     let result = new TokenComponent(id)
     result.price = BigInt.fromI32(0)
     result.parts = []
     result.debt = componentDebt
     result.deposit = componentBalance
     result.staking = BigInt.fromI32(0)
+    result.debtAdapters = ethDebt.adapters
+    result.stakingAdapters = []
+    result.vault = vault
 
     handleERC20Component(
         asset,
@@ -291,7 +333,7 @@ function getTokenBalances(
     token: Address,
     asset: Address,
     type: String,
-    vaults: Address[],
+    vault: Address,
     debtAdapters: Address[],
     stakingAdapters: Address[]
 ): TokenComponent {
@@ -301,25 +343,25 @@ function getTokenBalances(
     let componentDebt: BigInt = BigInt.fromI32(0)
     let componentStaking: BigInt = BigInt.fromI32(0)
 
-    let vaultsLength = vaults.length
     let assetERC20 = ERC20.bind(asset)
-    for (let j = 0; j < vaultsLength; j++) {
-        let vault = vaults[j]
-        log.debug("getTokenBalances processing vault: {}", [vault.toHexString()])
-        
-            
-        let vaultTokenBalance = assetERC20.balanceOf(vault)
-        log.debug("getTokenBalances got vault token balance: {}", [asset.toHexString(), vaultTokenBalance.toString()])
+    log.debug("getTokenBalances processing vault: {}", [vault.toHexString()])
+    
+    let vaultTokenBalance = assetERC20.balanceOf(vault)
+    log.debug("getTokenBalances got vault token balance: {}", [asset.toHexString(), vaultTokenBalance.toString()])
 
-        componentBalance = componentBalance.plus(vaultTokenBalance)
-        componentDebt = componentDebt.plus(getAdapterBalance(asset, vault, debtAdapters))
-        componentStaking = componentStaking.plus(getAdapterBalance(asset, vault, stakingAdapters))
-    }
+    componentBalance = componentBalance.plus(vaultTokenBalance)
+    let debt = getAdapterBalance(asset, vault, debtAdapters)
+    componentDebt = componentDebt.plus(debt.amount)
+    let staking = getAdapterBalance(asset, vault, stakingAdapters)
+    componentStaking = componentStaking.plus(staking.amount)
+    
     let balance = componentBalance.minus(componentDebt).plus(componentStaking)
-    let id = timestamp.toString().concat('_').concat(token.toHexString()).concat('_').concat(asset.toHexString())
+    let id = timestamp.toString().concat('_').concat(token.toHexString()).concat('_').concat(vault.toHexString()).concat('_').concat(asset.toHexString())
     let result = new TokenComponent(id)
     result.price = BigInt.fromI32(0)
     result.parts = []
+    result.debtAdapters = debt.adapters
+    result.stakingAdapters = staking.adapters
 
     if (!balance.equals(BigInt.fromI32(0))) {
         if (!type.includes("ERC20")) {
@@ -345,9 +387,13 @@ function getTokenBalances(
     if (!maybeName.reverted) {
         result.name = maybeName.value
     }
+    result.deposit = componentBalance
+    result.debt = componentDebt
+    result.staking = componentStaking
     result.tokrnStr = asset.toHexString()
     result.tokenType = type.toString()
     result.amount = balance
+    result.vault = vault
     return result
 }
 
@@ -355,11 +401,17 @@ function getAdapterBalance(
     asset: Address,
     vault: Address,
     debtAdapters: Address[]
-): BigInt {
+): AdapterBalanceResult {
     log.debug("getAdapterBalance asset: {} vault {}", [asset.toHexString(), vault.toHexString()])
 
     let componentDebt: BigInt = BigInt.fromI32(0)
+    let adapterIndexes = new Array<u32>(debtAdapters.length)
     let debtsLength = debtAdapters.length
+
+    for (let k = 0; k < debtsLength; k++) {
+        adapterIndexes[k] = 0
+    }
+    
     for (let k = 0; k < debtsLength; k++) {
         let debtAdapterAddress = debtAdapters[k]
         log.debug("getAdapterBalance processing debt adapter: {}", [debtAdapterAddress.toHexString()])
@@ -370,11 +422,40 @@ function getAdapterBalance(
             let amount = maybeAmount.value
             log.debug("getAdapterBalance debt adapter returned amount {}", [amount.toString()])
             componentDebt = componentDebt.plus(amount)
+            if (!amount.equals(BigInt.fromI32(0))) {
+                adapterIndexes[k] = 1 // mark adapter as used
+            }
         } else {
             log.debug("getAdapterBalance debt adapter reverted {}", [debtAdapterAddress.toHexString()])
         }
     }
-    return componentDebt
+
+    let userAdapterCount = 0
+    for (let k = 0; k < debtsLength; k++) {
+        if (adapterIndexes[k] === 1) {
+            userAdapterCount = userAdapterCount + 1
+        }
+    }
+
+    let usedAdapters = new Array<Bytes>(userAdapterCount)
+    for (let k = 0; k < debtsLength; k++) {
+        if (adapterIndexes[k] === 1) {
+            let debtAdapterAddress = debtAdapters[k]
+            usedAdapters.push(debtAdapterAddress)
+        }
+    }
+
+    return new AdapterBalanceResult(componentDebt, usedAdapters)
+}
+
+class AdapterBalanceResult {
+    amount: BigInt
+    adapters: Bytes[]
+
+    constructor(amount: BigInt, adapters: Bytes[]) {
+        this.amount = amount
+        this.adapters = adapters
+    }
 }
 
 function handleDay(timestamp: i32, currentPrice: BigInt, totalSupply: BigInt, token: string, initDayId: i32): void {

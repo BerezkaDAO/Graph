@@ -26,20 +26,30 @@ type DayTokenComponent @entity {
   token: Bytes!                 # token address
   supply: BigDecimal!           # total supply of underlying token
   name: String!                 # token name
-  components: [TokenComponent]! # token parts
+  vaults: [TokenVault]!         # list of vaults for this token
   totalPrice: BigInt!           # total const of one asset
   price: BigInt!                # price per token
+}
+
+type TokenVault @entity {
+  id: ID!                       # dayId + Token + Vault
+  vault: Bytes!                 # vault address
+  components: [TokenComponent]! # token parts
+  totalPrice: BigInt!           # total const of one asset
 }
 
 type TokenComponent @entity {
   id: ID!                       # random unique id 
   token: Bytes!                 # token address
+  vault: Bytes!                 # component vault
   tokrnStr: String!             # token string
   tokenType: String!            # token type in zerion API
   amount: BigInt!               # balance of tokens in address
   deposit: BigInt!              # deposit part of palance
   debt: BigInt!                 # debt part of palance
   staking: BigInt!              # staking part of palance
+  debtAdapters: [Bytes!]!       # debt apdaters for this component
+  stakingAdapters: [Bytes!]!    # staking adapters for this component
   price: BigInt!                # price (per one token)
   name: String!                 # token name
   parts: [TokenComponentPart]!  # parts of tokens
